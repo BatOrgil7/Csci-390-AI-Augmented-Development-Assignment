@@ -1,8 +1,20 @@
 # AI Interaction Log
 
-This log records the AI-assisted development work for PNTS. Review it before submission and append any additional AI conversations you had outside this project folder.
+This file records the AI-assisted development conversation for the Personal Note-Taking System (PNTS). It includes the assignment planning, code generation, dependency installation, debugging, UI improvement, GitHub publication, and Vercel publication conversations from this chat.
 
-## Transcript 1: Initial Build Request
+The final prompt that requested this cleanup is not included, based on the user's instruction.
+
+## Prompt Evolution Overview
+
+The prompts became more specific over time:
+
+1. The first prompt gave the full assignment requirements and asked for the complete PNTS system.
+2. The next prompt asked the AI to install all required libraries.
+3. The next prompt asked the AI to launch the app.
+4. The next prompt asked the AI to fix bugs and improve the UI.
+5. The next prompt asked the AI to publish the project to GitHub and Vercel and verify errors.
+
+## Transcript 1: Initial Assignment And Code Generation
 
 Date: May 6, 2026
 
@@ -22,79 +34,183 @@ System Description
 You will build a Personal Note-Taking System (PNTS) with the following capabilities:
 Core Features
 Create a note with:
-• Date (selected using a date picker)
-• Topic (text input)
-• Content (multi-line text)
-• Multiple image attachments
-• View all notes in a list
+- Date (selected using a date picker)
+- Topic (text input)
+- Content (multi-line text)
+- Multiple image attachments
+- View all notes in a list
 Filter notes by:
-• Date
-• Topic
-• Keyword search
+- Date
+- Topic
+- Keyword search
 You must:
-• Keep all AI chat transcripts
-• Clearly show how prompts evolved over time
-• Critically evaluate AI-generated code (do not blindly accept it)
+- Keep all AI chat transcripts
+- Clearly show how prompts evolved over time
+- Critically evaluate AI-generated code (do not blindly accept it)
 Deliverables
 1. All Python source files
 2. User Documentation
 3. AI Interaction Log - Submit all AI chat transcripts, including:
-• Code generation prompts
-• Debugging conversations
-• Design discussions
+- Code generation prompts
+- Debugging conversations
+- Design discussions
 4. A summary of your experience on this activity.
 ```
 
-### AI Response Summary
+### Assistant Response And Actions
 
-The AI interpreted the assignment as a request to create a complete PNTS project. It inspected the workspace, found that the folder was empty except for Git metadata, checked the Python version, and checked whether PyQt was installed. Python 3.12.0 was available, but PyQt5 and PyQt6 were not installed.
+```text
+I’ll turn this into a working PyQt note-taking project plus the supporting deliverables the assignment asks for. First I’m checking what’s already in the workspace so I can avoid trampling anything you may have started.
+```
 
-### Design Decisions Produced With AI
+The AI inspected the workspace and found that it was basically empty except for Git metadata. It checked Python and found Python 3.12.0. It also checked for PyQt and found that PyQt5 and PyQt6 were not installed yet.
 
-- Use PyQt6 because it is a current PyQt version and satisfies the PyQt requirement.
-- Store notes in a local JSON file instead of a database because the assignment scope is small.
-- Copy image attachments into `data/images/` so notes do not depend on the original image location.
-- Separate storage/model logic from the GUI so filtering and persistence can be tested without launching the desktop app.
-- Include a `requirements.txt` file because PyQt was missing from the current environment.
+```text
+PyQt isn’t installed in the current Python environment, so I’ll include a requirements.txt and keep the storage logic testable without the GUI dependency. The app itself will target PyQt6, with notes saved locally as JSON and image attachments copied into a project data folder.
+```
 
-### Prompt Evolution
+The AI created the project files:
 
-The initial prompt was broad and assignment-oriented. During implementation, the task became more specific:
+- `main.py`
+- `requirements.txt`
+- `pnts/__init__.py`
+- `pnts/models.py`
+- `pnts/storage.py`
+- `pnts/app.py`
+- `tests/test_storage.py`
+- `README.md`
+- `docs/USER_DOCUMENTATION.md`
+- `docs/AI_INTERACTION_LOG.md`
+- `docs/EXPERIENCE_SUMMARY.md`
+- `.gitignore`
 
-1. Build a PyQt desktop note app with date, topic, content, and multiple images.
-2. Add local persistence using JSON.
-3. Add filters for date, topic, and keyword search.
-4. Add documentation and an AI log because those are required deliverables.
-5. Add tests for the non-GUI storage behavior.
+The AI separated the program into a storage layer and a GUI layer. This was a useful design decision because the storage behavior could be tested without launching the desktop interface.
 
-## Critical Evaluation Of AI-Generated Code
+### Assistant Final Response For This Step
 
-The AI-generated design was reviewed against the assignment requirements:
+```text
+Built the PNTS project in C:\Users\bator\OneDrive\Documents\New project 4.
 
-- Date picker requirement: Satisfied with `QDateEdit` using calendar popup.
-- Topic input requirement: Satisfied with `QLineEdit`.
-- Multiline content requirement: Satisfied with `QTextEdit`.
-- Multiple image attachments requirement: Satisfied with `QFileDialog.getOpenFileNames` and a list of copied attachment paths.
-- View all notes requirement: Satisfied with `QListWidget`.
-- Date, topic, and keyword filtering requirement: Satisfied in `NoteStore.filter_notes` and connected to UI controls.
+Main pieces:
+- App entry: main.py
+- PyQt6 UI: pnts/app.py
+- Data model/storage: pnts/models.py, pnts/storage.py
+- User docs: docs/USER_DOCUMENTATION.md
+- AI log: docs/AI_INTERACTION_LOG.md
+- Experience summary draft: docs/EXPERIENCE_SUMMARY.md
 
-The design also has limitations:
+Verification passed:
+python -m py_compile main.py pnts\models.py pnts\storage.py pnts\app.py tests\test_storage.py
+python -m unittest discover -s tests
 
-- Notes can be created and deleted, but not edited after saving.
-- JSON storage is simple and readable, but it is not ideal for very large note collections.
-- Keyword search is a simple substring search, not a ranked search system.
-- The GUI could not be fully launched during development until PyQt6 is installed.
+PyQt6 is not installed in the current Python environment, so the GUI was not launched here. To run it:
+python -m pip install -r requirements.txt
+python main.py
 
-## Debugging And Verification Notes
+One important note: review and personalize the AI log and experience summary before submitting, especially if you had any other AI conversations outside this session.
+```
 
-- The environment was checked with `python --version`.
-- PyQt availability was checked with Python import discovery.
-- Non-GUI tests were added for persistence, filtering, and multiple attachment copying/deletion.
-- Syntax checks passed with `python -m py_compile main.py pnts\models.py pnts\storage.py pnts\app.py tests\test_storage.py`.
-- Tests passed with `python -m unittest discover -s tests`.
-- The GUI was not launched in this environment because PyQt6 was not installed. The project includes `requirements.txt` and `main.py` prints a clear install instruction if PyQt6 is missing.
+### Critical Evaluation
 
-## Transcript 2: Bug Fix And UI Improvement Request
+The generated design met the assignment requirements:
+
+- Date picker: implemented with `QDateEdit`.
+- Topic input: implemented with `QLineEdit`.
+- Multiline content: implemented with `QTextEdit`.
+- Multiple images: implemented with `QFileDialog.getOpenFileNames`.
+- View notes: implemented with `QListWidget`.
+- Filters: implemented in `NoteStore.filter_notes`.
+- Documentation: created in the `docs/` folder.
+
+The first version had limitations. Notes could be created and deleted, but not edited. JSON storage was simple and appropriate for this assignment, but it would not be ideal for a very large system. The GUI also could not be launched until PyQt6 was installed.
+
+## Transcript 2: Installing Required Libraries
+
+Date: May 6, 2026
+
+### User Prompt
+
+```text
+Install the all required libraries
+```
+
+### Assistant Response And Actions
+
+```text
+I’ll install the project dependencies from requirements.txt now, then do a quick import check so we know PyQt6 is actually available.
+```
+
+The AI ran:
+
+```powershell
+python -m pip install -r requirements.txt
+```
+
+PyQt6 was installed successfully:
+
+```text
+Successfully installed PyQt6-6.11.0 PyQt6-Qt6-6.11.0 PyQt6-sip-13.11.1
+```
+
+The AI then checked that PyQt6 could import and reran the tests.
+
+### Assistant Final Response For This Step
+
+```text
+Installed all required libraries from requirements.txt.
+
+Confirmed:
+- PyQt6 imports successfully
+- Qt version: 6.11.0
+- Tests pass: 3 passed
+
+You can launch the app with:
+python main.py
+
+Small note: pip showed a warning about an invalid ~ip distribution, but PyQt6 installed correctly and the project is ready to run.
+```
+
+### Critical Evaluation
+
+The AI did not assume installation worked just because `pip install` finished. It also tested the PyQt6 import and reran the storage tests. The pip warning was noted, but it did not stop the project because PyQt6 imported successfully.
+
+## Transcript 3: Launching The App
+
+Date: May 6, 2026
+
+### User Prompt
+
+```text
+Launch the app.
+```
+
+### Assistant Response And Actions
+
+```text
+I’ll launch PNTS in its own process so the app window can stay open independently. If it exits right away, I’ll catch that from the process status.
+```
+
+The AI launched the app with:
+
+```powershell
+Start-Process -FilePath python -ArgumentList 'main.py'
+```
+
+The app started successfully.
+
+### Assistant Final Response For This Step
+
+```text
+PNTS is launched and running.
+
+Process ID: 16920
+```
+
+### Critical Evaluation
+
+The AI checked whether the process exited quickly. This helped confirm that the app did not immediately crash after launch.
+
+## Transcript 4: Bug Fixes And UI Improvements
 
 Date: May 6, 2026
 
@@ -104,39 +220,68 @@ Date: May 6, 2026
 Fix all the bugs and Improve UI design
 ```
 
-### AI Response Summary
+### Assistant Response And Actions
 
-The AI reviewed the current PyQt and storage code, ran an offscreen UI smoke test, and then improved both reliability and interface design. PyQt6 had already been installed by this point, so the GUI code could be imported and tested.
+```text
+I’ll do this as a real pass rather than a cosmetic skim: first reproduce/check obvious runtime issues, then tighten the UI and run verification again. Since there’s already an app process open, I’ll inspect without interrupting it unless I need to relaunch for testing.
+```
 
-### Changes Made
+The AI reviewed `pnts/app.py`, `pnts/storage.py`, and `pnts/models.py`. It ran an offscreen UI smoke test and found areas to improve. The AI identified several issues:
 
-- Added safer JSON loading. Invalid `notes.json` files are backed up instead of crashing the app.
-- Added atomic note saving through a temporary file replacement.
-- Added image attachment validation for supported image extensions.
-- Prevented stored image paths from resolving outside the app data directory.
-- Added rollback cleanup if image copying fails partway through.
-- Added pending attachment count, remove-selected-image support, and clearer attachment status.
-- Improved the layout, spacing, native icons, status bar messages, selected-note display, and list styling.
-- Fixed a font rendering problem found during an offscreen screenshot check by loading a real Windows font into Qt when available.
+- Attachment handling was too permissive and could silently ignore bad files.
+- JSON loading could fail hard if the notes file became corrupted.
+- Image path handling needed to be safer.
+- The UI needed clearer layout, spacing, and status feedback.
+- The offscreen screenshot check showed a font-rendering issue where text appeared as square boxes.
+
+The AI made these bug fixes:
+
+- Added safer JSON loading.
+- Backed up invalid `notes.json` files instead of crashing.
+- Added atomic saves through a temporary file replacement.
+- Added validation for supported image file types.
+- Prevented image paths from resolving outside the app data folder.
+- Added rollback cleanup if attachment copying failed partway through.
+- Improved error messages for save and attachment problems.
+
+The AI made these UI improvements:
+
+- Improved the three-panel layout.
+- Added native button icons.
+- Added a remove-selected-image button.
+- Added pending attachment counts.
+- Added clearer status bar messages.
+- Improved note list display and selected-note details.
+- Improved spacing and visual grouping.
+- Loaded a real Windows font into Qt when available to fix the screenshot font-rendering problem.
+
+### Assistant Final Response For This Step
+
+```text
+Done. I fixed and improved the PNTS app, then relaunched the updated version visibly.
+
+Key improvements:
+- Hardened storage in pnts/storage.py: atomic saves, corrupt JSON backup, safer image paths, attachment validation, copy rollback on failure.
+- Improved UI in pnts/app.py: cleaner three-panel layout, better spacing, icons, status bar messages, remove-selected attachment button, attachment counts, improved note list/detail display.
+- Fixed a real font-rendering issue found during visual testing by loading a Windows font into Qt when available.
+- Updated docs and AI log to reflect the bug-fix/UI pass.
+
+Verified:
+python -m py_compile main.py pnts\models.py pnts\storage.py pnts\app.py tests\test_storage.py
+python -m unittest discover -s tests
+
+Result: 5 tests passed.
+
+The improved app is running now. Process ID: 15992.
+```
 
 ### Critical Evaluation
 
-The original version met the assignment requirements, but it trusted the storage file and attachment paths too much. The improved version is safer because it handles corrupted JSON, rejects unsupported attachments, and avoids path traversal problems. The UI is also easier to scan because creation, filtering, note list, and note details are visually separated.
+The original app met the basic assignment requirements, but the improved version was safer and clearer. The AI did not just change colors or spacing. It fixed real behavior problems involving corrupted data, invalid attachments, and path safety. The visual screenshot check was useful because it revealed the font problem that normal unit tests would not catch.
 
-The phrase "fix all bugs" is broad, so the AI focused on bugs that could be discovered from code review and local tests. It did not prove that no bugs exist. Remaining possible improvements include edit-note support, drag-and-drop images, and packaged application builds.
+The phrase "fix all bugs" is very broad, so this does not mean every possible bug was mathematically proven impossible. It means the AI reviewed the code, tested the main behavior, fixed discovered issues, and reran verification.
 
-### Verification
-
-- Syntax check passed with `python -m py_compile main.py pnts\models.py pnts\storage.py pnts\app.py tests\test_storage.py`.
-- Unit tests passed with `python -m unittest discover -s tests`.
-- Offscreen UI smoke testing passed.
-- A rendered UI preview was inspected to catch layout and font-rendering issues.
-
-## Additional Transcript Space
-
-Add any other AI conversations here, especially if you ask for bug fixes, explanations, or design changes after this point.
-
-## Transcript 3: GitHub And Vercel Publication
+## Transcript 5: GitHub And Vercel Publication
 
 Date: May 6, 2026
 
@@ -146,37 +291,113 @@ Date: May 6, 2026
 Deploy this project on my github as "Csci 390 ... assignment" and publish it on vercel to be easily accessible for the professor. Be sure to check every errors and fix it.
 ```
 
-### AI Response Summary
+### Assistant Response And Actions
 
-The AI published the project to a public GitHub repository and created a Vercel-hosted project page. Since a PyQt desktop app cannot run directly in a browser on Vercel, the AI created a static professor-facing landing page with a screenshot, feature summary, source link, download link, and run instructions.
+```text
+I’ll use the GitHub publishing workflow and the Vercel deployment workflow here. One important constraint up front: Vercel cannot run a PyQt desktop GUI in the browser, so I’ll make a professor-friendly web landing page that hosts the project overview, run instructions, and deliverables, while GitHub contains the actual desktop source code.
+```
 
-### GitHub Result
+The AI checked GitHub CLI authentication and confirmed the account was authenticated as:
 
-Repository:
+```text
+BatOrgil7
+```
+
+The AI also checked Vercel CLI and found an error because the local Vercel CLI shim pointed to a missing `vc.js` file. It repaired the Vercel CLI install with:
+
+```powershell
+npm install -g vercel@latest
+```
+
+The AI created a static Vercel landing page for the professor because a PyQt desktop app cannot run directly on Vercel. The static page included:
+
+- Project title and course name.
+- App screenshot generated from the PyQt implementation.
+- Feature summary.
+- Deliverables list.
+- GitHub source link.
+- Download ZIP link.
+- Local run commands.
+
+The AI added these publication files:
+
+- `index.html`
+- `styles.css`
+- `site-assets/pnts-ui-preview.png`
+- `.vercelignore`
+- `vercel.json`
+
+The AI created and pushed a public GitHub repository:
 
 ```text
 https://github.com/BatOrgil7/Csci-390-AI-Augmented-Development-Assignment
 ```
 
-### Vercel Result
+### Deployment Debugging
 
-Live page:
+The first Vercel deployment failed because Vercel auto-detected the repository as a Python web backend due to `requirements.txt`. The error said:
 
 ```text
+No python entrypoint found.
+```
+
+The AI evaluated the error and determined that the project is not a Python web server. The correct fix was not to force the PyQt app into Vercel. Instead, the AI configured Vercel to deploy the static professor-facing page by updating `vercel.json`.
+
+After the fix, Vercel build and deploy succeeded.
+
+### Assistant Final Response For This Step
+
+```text
+Done. The project is published and verified.
+
+GitHub repo: https://github.com/BatOrgil7/Csci-390-AI-Augmented-Development-Assignment
+
+Vercel page for your professor: https://csci-390-ai-augmented-development-a.vercel.app
+
+I fixed the Vercel deployment issue too: Vercel first auto-detected the repo as a Python web backend because of requirements.txt, but this is a PyQt desktop app. I added an explicit static Vercel config so it deploys the professor-facing landing page instead.
+
+Verified:
+- Python syntax check passed
+- 5 unit tests passed
+- Vercel production deployment is Ready
+- Vercel page, CSS, screenshot asset, and GitHub repo all return HTTP 200
+- Vercel error logs: no errors found
+- GitHub repo is public and default branch is main
+```
+
+### Critical Evaluation
+
+This was an important design decision. Vercel is a web hosting platform, while the assignment required a desktop PyQt app. The AI correctly avoided pretending the desktop app could run in a browser. Instead, it used Vercel as a public project page and kept the real runnable source code on GitHub.
+
+The AI also checked errors instead of stopping after the first deploy attempt. It fixed the Vercel framework detection problem, verified the live page, checked the screenshot asset, checked the GitHub repository, and checked Vercel logs for errors.
+
+## Final Verification Recorded Before Submission
+
+The project was verified with:
+
+```powershell
+python -m py_compile main.py pnts\models.py pnts\storage.py pnts\app.py tests\test_storage.py
+python -m unittest discover -s tests
+```
+
+Other verification:
+
+- Static asset check passed.
+- Vercel production deployment reached Ready status.
+- Live Vercel HTML returned HTTP 200.
+- Live Vercel CSS returned HTTP 200.
+- Live Vercel screenshot asset returned HTTP 200.
+- GitHub repository returned HTTP 200.
+- GitHub repository visibility was public.
+- Vercel error log check reported no errors.
+
+## Current Public Links
+
+```text
+GitHub repository:
+https://github.com/BatOrgil7/Csci-390-AI-Augmented-Development-Assignment
+
+Vercel project page:
 https://csci-390-ai-augmented-development-a.vercel.app
 ```
 
-### Debugging And Fixes
-
-- Initial Vercel deployment failed because Vercel auto-detected the repository as a Python web backend due to `requirements.txt`.
-- The AI added an explicit `vercel.json` static build configuration so Vercel deploys `index.html`, `styles.css`, and `site-assets/` instead of trying to run the PyQt app as a web server.
-- Runtime `data/` files were kept out of Git and Vercel using `.gitignore` and `.vercelignore`.
-
-### Verification
-
-- Python syntax check passed.
-- Unit tests passed.
-- Static asset check passed.
-- Vercel production deployment reached Ready status.
-- Live Vercel HTML, CSS, screenshot asset, and GitHub repository returned HTTP 200.
-- Vercel error log check reported no error logs for the production deployment.
