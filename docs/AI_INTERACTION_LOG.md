@@ -135,3 +135,48 @@ The phrase "fix all bugs" is broad, so the AI focused on bugs that could be disc
 ## Additional Transcript Space
 
 Add any other AI conversations here, especially if you ask for bug fixes, explanations, or design changes after this point.
+
+## Transcript 3: GitHub And Vercel Publication
+
+Date: May 6, 2026
+
+### User Prompt
+
+```text
+Deploy this project on my github as "Csci 390 ... assignment" and publish it on vercel to be easily accessible for the professor. Be sure to check every errors and fix it.
+```
+
+### AI Response Summary
+
+The AI published the project to a public GitHub repository and created a Vercel-hosted project page. Since a PyQt desktop app cannot run directly in a browser on Vercel, the AI created a static professor-facing landing page with a screenshot, feature summary, source link, download link, and run instructions.
+
+### GitHub Result
+
+Repository:
+
+```text
+https://github.com/BatOrgil7/Csci-390-AI-Augmented-Development-Assignment
+```
+
+### Vercel Result
+
+Live page:
+
+```text
+https://csci-390-ai-augmented-development-a.vercel.app
+```
+
+### Debugging And Fixes
+
+- Initial Vercel deployment failed because Vercel auto-detected the repository as a Python web backend due to `requirements.txt`.
+- The AI added an explicit `vercel.json` static build configuration so Vercel deploys `index.html`, `styles.css`, and `site-assets/` instead of trying to run the PyQt app as a web server.
+- Runtime `data/` files were kept out of Git and Vercel using `.gitignore` and `.vercelignore`.
+
+### Verification
+
+- Python syntax check passed.
+- Unit tests passed.
+- Static asset check passed.
+- Vercel production deployment reached Ready status.
+- Live Vercel HTML, CSS, screenshot asset, and GitHub repository returned HTTP 200.
+- Vercel error log check reported no error logs for the production deployment.

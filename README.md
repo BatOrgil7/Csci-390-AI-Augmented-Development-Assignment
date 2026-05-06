@@ -2,6 +2,13 @@
 
 This project implements a desktop Personal Note-Taking System (PNTS) for CSci 390 Exercise 6. It is written in Python with PyQt6.
 
+## Public Links
+
+- Vercel project page: https://csci-390-ai-augmented-development-a.vercel.app
+- GitHub repository: https://github.com/BatOrgil7/Csci-390-AI-Augmented-Development-Assignment
+
+Vercel hosts a static project page for easy review. The actual PNTS application is a desktop PyQt app and runs locally with Python.
+
 ## Features
 
 - Create notes with a date, topic, multiline content, and multiple image attachments.
