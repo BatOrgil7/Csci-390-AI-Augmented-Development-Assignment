@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSci 390 PNTS Assignment</title>
+    <meta
+      name="description"
+      content="CSci 390 AI Augmented Development final activity: a Python and PyQt Personal Note-Taking System."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="CSci 390 PNTS home">
+        <span class="brand-mark">PN</span>
+        <span>CSci 390 PNTS</span>
+      </a>
+      <nav aria-label="Project sections">
+        <a href="#features">Features</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#run">Run</a>
+        <a href="https://github.com/BatOrgil7/Csci-390-AI-Augmented-Development-Assignment">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="course">CSci 390: AI Augmented Development</p>
+          <h1>Personal Note-Taking System</h1>
+          <p class="lead">
+            A desktop Python and PyQt application for creating, organizing, filtering,
+            and viewing notes with multiple image attachments.
+          </p>
+          <div class="actions" aria-label="Primary actions">
+            <a class="button primary" href="https://github.com/BatOrgil7/Csci-390-AI-Augmented-Development-Assignment">
+              View Source
+            </a>
+            <a class="button secondary" href="https://github.com/BatOrgil7/Csci-390-AI-Augmented-Development-Assignment/archive/refs/heads/main.zip">
+              Download ZIP
+            </a>
+          </div>
+        </div>
+        <figure class="preview">
+          <img src="site-assets/pnts-ui-preview.png" alt="Screenshot of the PNTS desktop app interface">
+          <figcaption>Desktop app preview generated from the PyQt implementation.</figcaption>
+        </figure>
+      </section>
+
+      <section class="section" id="features">
+        <div class="section-heading">
+          <h2>Core Features</h2>
+          <p>The application implements the required note creation, viewing, filtering, and image attachment behavior.</p>
+        </div>
+        <div class="feature-grid">
+          <article>
+            <h3>Create Notes</h3>
+            <p>Date picker, topic input, multiline content, and multiple image attachments.</p>
+          </article>
+          <article>
+            <h3>Organize</h3>
+            <p>Notes are saved locally in JSON and shown in a clear list sorted by date and creation time.</p>
+          </article>
+          <article>
+            <h3>Filter</h3>
+            <p>Filter the note list by date, topic text, and keyword search across topic and content.</p>
+          </article>
+          <article>
+            <h3>Review</h3>
+            <p>Open a selected note to read content and view every attached image.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split" id="deliverables">
+        <div>
+          <h2>Assignment Deliverables</h2>
+          <p>
+            The GitHub repository includes source files, user documentation, an AI interaction log,
+            and an experience summary.
+          </p>
+        </div>
+        <ul class="deliverable-list">
+          <li>Python source files in <code>pnts/</code></li>
+          <li>User documentation in <code>docs/USER_DOCUMENTATION.md</code></li>
+          <li>AI interaction log in <code>docs/AI_INTERACTION_LOG.md</code></li>
+          <li>Experience summary in <code>docs/EXPERIENCE_SUMMARY.md</code></li>
+          <li>Non-GUI tests in <code>tests/test_storage.py</code></li>
+        </ul>
+      </section>
+
+      <section class="section run" id="run">
+        <div class="section-heading">
+          <h2>Run Locally</h2>
+          <p>Vercel hosts this project page. The actual PNTS application is a desktop PyQt app and runs locally.</p>
+        </div>
+        <div class="command-panel">
+          <pre><code>python -m pip install -r requirements.txt
+python main.py</code></pre>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
+
